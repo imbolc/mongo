@@ -1,20 +1,36 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
+import sys
+
 from setuptools import setup
 import mongo
+
+
+if sys.argv[-1] in ['test', 'publish']:
+    import doctest
+
+    if doctest.testfile('README.md', verbose=True).failed:
+        sys.exit()
+
+    if sys.argv[-1] == 'publish':
+        os.system('python setup.py sdist upload')
+        sys.exit()
 
 setup(
     name         = 'mongo',
     version      = mongo.__version__,
-    packages     = ['mongo'],
-    requires     = ['pymongo'],
     description  = 'Minimalistic pymongo object wrapper',
-    long_description = open('README.md').read(),
+    url          = 'https://github.com/imbolc/mongo',
+
+    packages     = ['mongo'],
+    install_requires = ['pymongo'],
+
     author       = 'Imbolc',
     author_email = 'imbolc@imbolc.name',
-    url          = 'https://github.com/imbolc/pongo',
-    download_url = 'https://github.com/imbolc/pongo/tarball/master',
-    license      = 'MIT License',
+    license      = open('LICENSE').read(),
+    long_description = open('README.md').read(),
+
     keywords     = ['mongodb', 'pymongo', 'orm'],
     classifiers  = [
         'Development Status :: 4 - Beta',
