@@ -24,7 +24,7 @@ setup(
     url          = 'https://github.com/imbolc/mongo',
 
     packages     = ['mongo'],
-    install_requires = ['pymongo'],
+    install_requires = ['pymongo', 'bson'],
 
     author       = 'Imbolc',
     author_email = 'imbolc@imbolc.name',
@@ -35,6 +35,7 @@ setup(
     classifiers  = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
+        'License :: OSI Approved :: ISC License (ISCL)',
         'Programming Language :: Python',
     ],
 )
