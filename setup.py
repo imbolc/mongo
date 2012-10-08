@@ -4,7 +4,9 @@ import os
 import sys
 
 from setuptools import setup
-import mongo
+
+
+VERSION = '0.0.4'
 
 
 if sys.argv[-1] in ['test', 'publish']:
@@ -19,12 +21,12 @@ if sys.argv[-1] in ['test', 'publish']:
 
 setup(
     name         = 'mongo',
-    version      = mongo.__version__,
+    version      = VERSION,
     description  = 'Minimalistic pymongo object wrapper',
     url          = 'https://github.com/imbolc/mongo',
 
     packages     = ['mongo'],
-    install_requires = ['pymongo', 'bson'],
+    install_requires = ['pymongo'],
 
     author       = 'Imbolc',
     author_email = 'imbolc@imbolc.name',

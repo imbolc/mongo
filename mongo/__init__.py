@@ -4,7 +4,7 @@ import re
 import bson
 import pymongo
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 
 class cached_classmethod(object):
