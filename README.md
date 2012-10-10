@@ -40,7 +40,7 @@ Create document
 ---------------
     
     >>> doc = Doc(foo='bar')
-    >>> doc.number = 10
+    >>> doc['number'] = 10
     >>> doc.save()
     >>> '_id' in doc
     True
@@ -82,23 +82,23 @@ Update filtered documents:
 
     >>> t = Doc.update({'number': 10}, {'$set': {'text': 'foo'}})
     >>> doc = Doc.find_one({'number': 10})
-    >>> doc.text
+    >>> doc['text']
     u'foo'
 
 Save only some fields:
 
-    >>> doc.text = u'bar'
-    >>> doc.number = 11
+    >>> doc['text'] = u'bar'
+    >>> doc['number'] = 11
     >>> doc.save_fields('text')
     >>> doc = Doc.find_one({'number': 10})
-    >>> doc.text, doc.number
+    >>> doc['text'], doc['number']
     (u'bar', 10)
 
 Update only some fields:
 
     >>> doc.atomic_update({'$inc': {'number': 2}})
     >>> doc = Doc.find_one({'text': 'bar'})
-    >>> doc.number
+    >>> doc['number']
     12
 
 

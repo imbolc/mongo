@@ -6,7 +6,7 @@ import sys
 from setuptools import setup
 
 
-VERSION = '0.0.4'
+VERSION = '0.1.0'
 
 
 if sys.argv[-1] in ['test', 'publish']:

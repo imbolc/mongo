@@ -4,8 +4,6 @@ import re
 import bson
 import pymongo
 
-__version__ = '0.0.3'
-
 
 class cached_classmethod(object):
     def __init__(self, f):
@@ -139,12 +137,6 @@ class Document(dict):
 
     def __eq__(self, other):
         return '_id' in self and self['_id'] == other.get('_id')
-
-    def __getattr__(self, attr):
-        return self[attr]
-
-    def __setattr__(self, attr, value):
-        self[attr] = value
 
     @classmethod
     def get_or_create(cls, spec, defaults=None):
