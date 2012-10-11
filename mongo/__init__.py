@@ -165,7 +165,7 @@ class Document(dict):
     def save_fields(self, keys, *args, **kwargs):
         if isinstance(keys, basestring):
             keys = [keys]
-        doc = dict((k, self[k]) for k in keys)
+        doc = dict((k, dotted_get(self, k)) for k in keys)
         self.coll.update({'_id': self['_id']}, {'$set': doc}, *args, **kwargs)
 
     def delete(self):
@@ -173,6 +173,13 @@ class Document(dict):
         ret = self.coll.remove(self['_id'])
         del self['_id']
         return ret
+
+    def delete_fields(self, keys, *args, **kwargs):
+        if isinstance(keys, basestring):
+            keys = [keys]
+        doc = dict((k, 1) for k in keys)
+        self.coll.update({'_id': self['_id']}, {'$unset': doc}, *args, **kwargs)
+
 
     def atomic_update(self, doc, **kwargs):
         self.coll.update({'_id': self['_id']}, doc, **kwargs)
@@ -196,6 +203,10 @@ class Index(object):
     def ensure(self, collection):
         return collection.ensure_index(*self._args, **self._kwargs)
 
+def dotted_get(src, key):
+    for subkey in key.split('.'):
+        src = src[subkey]
+    return src
 
 def to_underscore(string):
     new_string = re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1_\2', string)
